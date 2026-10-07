@@ -1,0 +1,478 @@
+{
+  "11:30-3": {
+    "subject": "(11055) DATA STRUCT",
+    "room": ""
+  },
+  "11:30-2": {
+    "subject": "(11068) PT",
+    "room": ""
+  },
+  "17:0-4": {
+    "subject": "",
+    "room": ""
+  },
+  "11:30-4": {
+    "subject": "(11068) PT",
+    "room": ""
+  },
+  "10:30-3": {
+    "subject": "(11055) DATA STRUCT",
+    "room": ""
+  },
+  "11:30-1": {
+    "subject": "(11055) DATA STRUCT",
+    "room": ""
+  },
+  "10:0-3": {
+    "subject": "(11055) DATA STRUCT",
+    "room": ""
+  },
+  "9:30-1": {
+    "subject": "(11055) DATA STRUCT",
+    "room": "I1004"
+  },
+  "10:30-1": {
+    "subject": "(11055) DATA STRUCT",
+    "room": ""
+  },
+  "10:0-2": {
+    "subject": "DATASTRUCT (11092)",
+    "room": ""
+  },
+  "8:30-1": {
+    "subject": "",
+    "room": "I1001"
+  },
+  "9:0-2": {
+    "subject": "DATASTRUCT (11092)",
+    "room": "I1004"
+  },
+  "13:0-1": {
+    "subject": "",
+    "room": ""
+  },
+  "14:30-2": {
+    "subject": "(11058) DATASTRUCT",
+    "room": ""
+  },
+  "15:0-3": {
+    "subject": "(11040) IT REVIEW",
+    "room": ""
+  },
+  "14:30-4": {
+    "subject": "(11058) DATASTRUCT",
+    "room": ""
+  },
+  "8:30-5": {
+    "subject": "",
+    "room": "I1001"
+  },
+  "9:0-4": {
+    "subject": "DATASTRUCT (11092)",
+    "room": "I1004"
+  },
+  "8:0-1": {
+    "subject": "",
+    "room": ""
+  },
+  "8:0-2": {
+    "subject": "",
+    "room": ""
+  },
+  "8:0-3": {
+    "subject": "",
+    "room": ""
+  },
+  "9:0-3": {
+    "subject": "",
+    "room": ""
+  },
+  "9:30-4": {
+    "subject": "DATASTRUCT (11092)",
+    "room": ""
+  },
+  "10:0-5": {
+    "subject": "",
+    "room": ""
+  },
+  "10:30-5": {
+    "subject": "",
+    "room": ""
+  },
+  "11:0-5": {
+    "subject": "",
+    "room": "310"
+  },
+  "11:30-5": {
+    "subject": "",
+    "room": ""
+  },
+  "10:0-4": {
+    "subject": "DATASTRUCT (11092)",
+    "room": ""
+  },
+  "9:30-5": {
+    "subject": "",
+    "room": "310"
+  },
+  "8:30-2": {
+    "subject": "",
+    "room": ""
+  },
+  "15:0-2": {
+    "subject": "(11058) DATASTRUCT",
+    "room": ""
+  },
+  "15:30-2": {
+    "subject": "(11058) DATASTRUCT",
+    "room": ""
+  },
+  "16:30-2": {
+    "subject": "",
+    "room": ""
+  },
+  "16:0-2": {
+    "subject": "",
+    "room": ""
+  },
+  "15:30-3": {
+    "subject": "DATA STRUCT (11091)",
+    "room": "I1004"
+  },
+  "15:0-4": {
+    "subject": "(11058) DATASTRUCT",
+    "room": ""
+  },
+  "15:30-4": {
+    "subject": "(11058) DATASTRUCT",
+    "room": ""
+  },
+  "16:0-4": {
+    "subject": "",
+    "room": ""
+  },
+  "9:0-5": {
+    "subject": "",
+    "room": ""
+  },
+  "9:0-1": {
+    "subject": "",
+    "room": ""
+  },
+  "10:0-1": {
+    "subject": "(11055) DATA STRUCT",
+    "room": ""
+  },
+  "9:30-2": {
+    "subject": "DATASTRUCT (11092)",
+    "room": ""
+  },
+  "9:30-3": {
+    "subject": "(11055) DATA STRUCT",
+    "room": "I1004"
+  },
+  "8:30-3": {
+    "subject": "",
+    "room": "I1001"
+  },
+  "11:0-2": {
+    "subject": "(11068) PT",
+    "room": ""
+  },
+  "10:30-2": {
+    "subject": "(11068) PT",
+    "room": "I1006"
+  },
+  "10:30-4": {
+    "subject": "(11068) PT",
+    "room": ""
+  },
+  "11:0-4": {
+    "subject": "(11068) PT",
+    "room": ""
+  },
+  "14:30-5": {
+    "subject": "(11040) IT REVIEW",
+    "room": "I1007"
+  },
+  "12:0-2": {
+    "subject": "",
+    "room": ""
+  },
+  "13:0-2": {
+    "subject": "",
+    "room": ""
+  },
+  "12:30-2": {
+    "subject": "",
+    "room": ""
+  },
+  "12:0-4": {
+    "subject": "",
+    "room": ""
+  },
+  "13:0-4": {
+    "subject": "",
+    "room": ""
+  },
+  "12:30-4": {
+    "subject": "",
+    "room": ""
+  },
+  "12:30-6": {
+    "subject": "",
+    "room": ""
+  },
+  "12:30-3": {
+    "subject": "",
+    "room": ""
+  },
+  "13:30-2": {
+    "subject": "(11058) DATASTRUCT",
+    "room": "I1004"
+  },
+  "14:0-2": {
+    "subject": "(11058) DATASTRUCT",
+    "room": ""
+  },
+  "14:0-4": {
+    "subject": "(11058) DATASTRUCT",
+    "room": ""
+  },
+  "13:30-4": {
+    "subject": "(11058) DATASTRUCT",
+    "room": "I1004"
+  },
+  "13:30-5": {
+    "subject": "(11039) IT REVIEW",
+    "room": "I1007"
+  },
+  "13:30-3": {
+    "subject": "(11039) IT REVIEW",
+    "room": "I1007"
+  },
+  "15:30-1": {
+    "subject": "DATA STRUCT (11091)",
+    "room": "I1004"
+  },
+  "16:0-1": {
+    "subject": "DATA STRUCT (11091)",
+    "room": ""
+  },
+  "14:30-1": {
+    "subject": "(11040) IT REVIEW",
+    "room": "I1007"
+  },
+  "16:0-3": {
+    "subject": "DATA STRUCT (11091)",
+    "room": ""
+  },
+  "15:30-5": {
+    "subject": "DATA STRUCT (11091)",
+    "room": "I1004"
+  },
+  "16:0-5": {
+    "subject": "DATA STRUCT (11091)",
+    "room": ""
+  },
+  "15:0-5": {
+    "subject": "(11040) IT REVIEW",
+    "room": ""
+  },
+  "14:30-3": {
+    "subject": "(11040) IT REVIEW",
+    "room": "I1007"
+  },
+  "15:0-1": {
+    "subject": "(11040) IT REVIEW",
+    "room": ""
+  },
+  "14:0-5": {
+    "subject": "(11039) IT REVIEW",
+    "room": ""
+  },
+  "12:30-1": {
+    "subject": "",
+    "room": ""
+  },
+  "13:0-3": {
+    "subject": "",
+    "room": ""
+  },
+  "12:30-5": {
+    "subject": "",
+    "room": "I1005"
+  },
+  "13:0-5": {
+    "subject": "",
+    "room": ""
+  },
+  "13:30-1": {
+    "subject": "(11039) IT REVIEW",
+    "room": "I1007"
+  },
+  "8:30-6": {
+    "subject": "",
+    "room": ""
+  },
+  "10:30-6": {
+    "subject": "(11103) Free Elec 2",
+    "room": ""
+  },
+  "10:0-6": {
+    "subject": "(11103) Free Elec 2",
+    "room": ""
+  },
+  "9:30-6": {
+    "subject": "(11103) Free Elec 2",
+    "room": ""
+  },
+  "9:0-6": {
+    "subject": "(11103) Free Elec 2",
+    "room": "I1002"
+  },
+  "8:0-6": {
+    "subject": "",
+    "room": ""
+  },
+  "12:0-6": {
+    "subject": "",
+    "room": "Online"
+  },
+  "13:0-6": {
+    "subject": "",
+    "room": ""
+  },
+  "14:30-6": {
+    "subject": "",
+    "room": ""
+  },
+  "14:0-6": {
+    "subject": "",
+    "room": ""
+  },
+  "13:30-6": {
+    "subject": "",
+    "room": ""
+  },
+  "15:0-6": {
+    "subject": "",
+    "room": ""
+  },
+  "15:30-6": {
+    "subject": "",
+    "room": ""
+  },
+  "16:0-6": {
+    "subject": "",
+    "room": ""
+  },
+  "16:30-6": {
+    "subject": "",
+    "room": ""
+  },
+  "16:30-5": {
+    "subject": "",
+    "room": ""
+  },
+  "17:0-6": {
+    "subject": "",
+    "room": ""
+  },
+  "17:30-6": {
+    "subject": "",
+    "room": ""
+  },
+  "12:0-1": {
+    "subject": "",
+    "room": ""
+  },
+  "12:0-3": {
+    "subject": "",
+    "room": ""
+  },
+  "12:0-5": {
+    "subject": "",
+    "room": ""
+  },
+  "11:0-1": {
+    "subject": "(11055) DATA STRUCT",
+    "room": ""
+  },
+  "7:30-3": {
+    "subject": "",
+    "room": ""
+  },
+  "14:0-1": {
+    "subject": "(11039) IT REVIEW",
+    "room": ""
+  },
+  "17:0-1": {
+    "subject": "",
+    "room": ""
+  },
+  "17:30-1": {
+    "subject": "",
+    "room": ""
+  },
+  "17:0-3": {
+    "subject": "",
+    "room": ""
+  },
+  "17:30-3": {
+    "subject": "",
+    "room": ""
+  },
+  "17:30-5": {
+    "subject": "",
+    "room": ""
+  },
+  "17:0-5": {
+    "subject": "",
+    "room": ""
+  },
+  "14:0-3": {
+    "subject": "(11039) IT REVIEW",
+    "room": ""
+  },
+  "11:0-3": {
+    "subject": "(11055) DATA STRUCT",
+    "room": ""
+  },
+  "7:0-6": {
+    "subject": "",
+    "room": "Laptop / Renoir PC"
+  },
+  "7:30-6": {
+    "subject": "",
+    "room": ""
+  },
+  "11:0-6": {
+    "subject": "(11103) Free Elec 2",
+    "room": ""
+  },
+  "11:30-6": {
+    "subject": "(11103) Free Elec 2",
+    "room": ""
+  },
+  "18:0-6": {
+    "subject": "",
+    "room": ""
+  },
+  "18:30-6": {
+    "subject": "",
+    "room": ""
+  },
+  "8:30-4": {
+    "subject": "",
+    "room": ""
+  },
+  "16:30-3": {
+    "subject": "",
+    "room": ""
+  },
+  "16:30-4": {
+    "subject": "",
+    "room": ""
+  }
+}
