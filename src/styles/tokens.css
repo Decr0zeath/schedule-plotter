@@ -1,0 +1,88 @@
+/*
+ * Design tokens. Every color is written with light-dark(), so a subtree can
+ * switch theme by setting color-scheme (the exported poster does this).
+ * The page follows the OS unless the viewer picked a theme (data-theme).
+ */
+:root {
+  color-scheme: light dark;
+
+  /* Surfaces */
+  --page: light-dark(#f3f2ee, #0d0d0d);
+  --surface: light-dark(#fcfcfb, #1a1a19);
+  --surface-2: light-dark(#f6f5f1, #212120);
+  --surface-3: light-dark(#ecebe6, #2a2a28);
+  --raised: light-dark(#ffffff, #222221);
+  --track: light-dark(#ebeae5, #121211);
+  --thumb: light-dark(#ffffff, #2e2e2c);
+
+  /* Ink */
+  --ink: light-dark(#0b0b0b, #ffffff);
+  --ink-2: light-dark(#52514e, #c3c2b7);
+  --ink-3: light-dark(#898781, #898781);
+
+  /* Lines */
+  --line: light-dark(#e1e0d9, #2c2c2a);
+  --line-soft: light-dark(#efeee9, #222221);
+  --border: light-dark(rgb(11 11 11 / 0.09), rgb(255 255 255 / 0.09));
+  --border-strong: light-dark(rgb(11 11 11 / 0.15), rgb(255 255 255 / 0.15));
+  --hover: light-dark(rgb(11 11 11 / 0.045), rgb(255 255 255 / 0.06));
+  --press: light-dark(rgb(11 11 11 / 0.08), rgb(255 255 255 / 0.1));
+
+  /* Actions */
+  --primary: light-dark(#0b0b0b, #f4f3ee);
+  --on-primary: light-dark(#ffffff, #0b0b0b);
+  --focus: light-dark(#2a78d6, #3987e5);
+
+  /* Status — reserved meanings, always paired with an icon + label */
+  --critical: #d03b3b;
+  --critical-text: light-dark(#b42d2d, #f07a7a);
+  --warning: #fab219;
+  --good: #0ca30c;
+  --good-text: light-dark(#006300, #0ca30c);
+  --now: light-dark(#d03b3b, #f05b5b);
+
+  /*
+   * Categorical course colors, in assignment order (see lib/palette.ts).
+   * Validated for CVD separation in both modes against --surface.
+   */
+  --cat-blue: light-dark(#2a78d6, #3987e5);
+  --cat-orange: light-dark(#eb6834, #d95926);
+  --cat-aqua: light-dark(#1baf7a, #199e70);
+  --cat-yellow: light-dark(#eda100, #c98500);
+  --cat-magenta: light-dark(#e87ba4, #d55181);
+  --cat-green: light-dark(#008300, #008300);
+  --cat-violet: light-dark(#4a3aa7, #9085e9);
+  --cat-red: light-dark(#e34948, #e66767);
+  --cat-gray: light-dark(#898781, #898781);
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px light-dark(rgb(20 20 18 / 0.06), rgb(0 0 0 / 0.45));
+  --shadow-md: 0 1px 2px light-dark(rgb(20 20 18 / 0.05), rgb(0 0 0 / 0.35)),
+    0 10px 28px -10px light-dark(rgb(20 20 18 / 0.18), rgb(0 0 0 / 0.65));
+  --shadow-lg: 0 2px 6px light-dark(rgb(20 20 18 / 0.06), rgb(0 0 0 / 0.4)),
+    0 28px 70px -18px light-dark(rgb(20 20 18 / 0.32), rgb(0 0 0 / 0.75));
+
+  /* Shape & type */
+  --radius-sm: 8px;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --font: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  /* Week grid */
+  --gutter: 64px;
+}
+
+:root[data-theme='light'],
+[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'],
+[data-theme='dark'] {
+  color-scheme: dark;
+}
