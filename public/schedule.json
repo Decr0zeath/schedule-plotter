@@ -1,0 +1,234 @@
+{
+  "app": "schedule-plotter",
+  "version": 2,
+  "activeId": "sy-2025-2026-1st",
+  "schedules": [
+    {
+      "id": "sy-2025-2026-1st",
+      "title": "Undergraduate & Graduate Classes",
+      "owner": "Violdan E. Bayocot",
+      "term": "SY 2025–2026 · 1st Semester",
+      "termStart": "",
+      "termEnd": "",
+      "settings": {
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "startHour": 7,
+        "endHour": 19,
+        "fitToClasses": false,
+        "snap": 30,
+        "clock": "12h"
+      },
+      "courses": [
+        {
+          "id": "c-11055",
+          "code": "11055",
+          "title": "DATA STRUCT",
+          "color": "blue",
+          "notes": ""
+        },
+        {
+          "id": "c-11039",
+          "code": "11039",
+          "title": "IT REVIEW",
+          "color": "orange",
+          "notes": ""
+        },
+        {
+          "id": "c-11040",
+          "code": "11040",
+          "title": "IT REVIEW",
+          "color": "aqua",
+          "notes": ""
+        },
+        {
+          "id": "c-11091",
+          "code": "11091",
+          "title": "DATA STRUCT",
+          "color": "yellow",
+          "notes": ""
+        },
+        {
+          "id": "c-11092",
+          "code": "11092",
+          "title": "DATASTRUCT",
+          "color": "magenta",
+          "notes": ""
+        },
+        {
+          "id": "c-11068",
+          "code": "11068",
+          "title": "PT",
+          "color": "green",
+          "notes": ""
+        },
+        {
+          "id": "c-11058",
+          "code": "11058",
+          "title": "DATASTRUCT",
+          "color": "violet",
+          "notes": ""
+        },
+        {
+          "id": "c-11103",
+          "code": "11103",
+          "title": "Free Elec 2",
+          "color": "red",
+          "notes": ""
+        }
+      ],
+      "meetings": [
+        {
+          "id": "m-1-570-11055",
+          "courseId": "c-11055",
+          "day": 1,
+          "start": 570,
+          "end": 720,
+          "room": "I1004"
+        },
+        {
+          "id": "m-1-810-11039",
+          "courseId": "c-11039",
+          "day": 1,
+          "start": 810,
+          "end": 870,
+          "room": "I1007"
+        },
+        {
+          "id": "m-1-870-11040",
+          "courseId": "c-11040",
+          "day": 1,
+          "start": 870,
+          "end": 930,
+          "room": "I1007"
+        },
+        {
+          "id": "m-1-930-11091",
+          "courseId": "c-11091",
+          "day": 1,
+          "start": 930,
+          "end": 990,
+          "room": "I1004"
+        },
+        {
+          "id": "m-2-540-11092",
+          "courseId": "c-11092",
+          "day": 2,
+          "start": 540,
+          "end": 630,
+          "room": "I1004"
+        },
+        {
+          "id": "m-2-630-11068",
+          "courseId": "c-11068",
+          "day": 2,
+          "start": 630,
+          "end": 720,
+          "room": "I1006"
+        },
+        {
+          "id": "m-2-810-11058",
+          "courseId": "c-11058",
+          "day": 2,
+          "start": 810,
+          "end": 960,
+          "room": "I1004"
+        },
+        {
+          "id": "m-3-570-11055",
+          "courseId": "c-11055",
+          "day": 3,
+          "start": 570,
+          "end": 720,
+          "room": "I1004"
+        },
+        {
+          "id": "m-3-810-11039",
+          "courseId": "c-11039",
+          "day": 3,
+          "start": 810,
+          "end": 870,
+          "room": "I1007"
+        },
+        {
+          "id": "m-3-870-11040",
+          "courseId": "c-11040",
+          "day": 3,
+          "start": 870,
+          "end": 930,
+          "room": "I1007"
+        },
+        {
+          "id": "m-3-930-11091",
+          "courseId": "c-11091",
+          "day": 3,
+          "start": 930,
+          "end": 990,
+          "room": "I1004"
+        },
+        {
+          "id": "m-4-540-11092",
+          "courseId": "c-11092",
+          "day": 4,
+          "start": 540,
+          "end": 630,
+          "room": "I1004"
+        },
+        {
+          "id": "m-4-630-11068",
+          "courseId": "c-11068",
+          "day": 4,
+          "start": 630,
+          "end": 720,
+          "room": ""
+        },
+        {
+          "id": "m-4-810-11058",
+          "courseId": "c-11058",
+          "day": 4,
+          "start": 810,
+          "end": 960,
+          "room": "I1004"
+        },
+        {
+          "id": "m-5-810-11039",
+          "courseId": "c-11039",
+          "day": 5,
+          "start": 810,
+          "end": 870,
+          "room": "I1007"
+        },
+        {
+          "id": "m-5-870-11040",
+          "courseId": "c-11040",
+          "day": 5,
+          "start": 870,
+          "end": 930,
+          "room": "I1007"
+        },
+        {
+          "id": "m-5-930-11091",
+          "courseId": "c-11091",
+          "day": 5,
+          "start": 930,
+          "end": 990,
+          "room": "I1004"
+        },
+        {
+          "id": "m-6-540-11103",
+          "courseId": "c-11103",
+          "day": 6,
+          "start": 540,
+          "end": 720,
+          "room": "I1002"
+        }
+      ]
+    }
+  ]
+}
