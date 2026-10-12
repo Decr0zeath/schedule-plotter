@@ -14,7 +14,7 @@ Your job is to:
 3. Review the result and critique it until it meets the bar.
 4. Report back to the user.
 
-Don't write feature code yourself, even small fixes. Send problems found in review back to Astra as critique. You may edit `CLAUDE.md` and `AGENTS.md`, and install dependencies when Astra can't (see below).
+Don't write feature code yourself, even small fixes. Send problems found in review back to Astra as critique. You may edit `CLAUDE.md` and `AGENTS.md`, and install dependencies when Astra can't (see below). The one exception is when Astra is rate-limited; see "When Astra is rate-limited".
 
 The goal is an efficient app with a coherent UI/UX. Judge every change against the UI/UX system in AGENTS.md, not just on whether it works.
 
@@ -41,6 +41,16 @@ REPO="$(git rev-parse --show-toplevel)" && cd "$REPO" && codex exec -m gpt-6-ast
     -c model_reasoning_effort='"high"' -i shot.png \
     -o "$SCRATCH/astra/<task>.r2.md" - < "$SCRATCH/astra/<task>.critique-1.md" > "$SCRATCH/astra/<task>.r2.log" 2>&1
   ```
+
+### When Astra is rate-limited
+
+If a dispatch or resume fails with a Codex usage-limit error (the log ends with "You've hit your usage limit … try again at <time>"), take over the implementation yourself until the limit resets. Don't wait or poll for the reset.
+
+1. **Check what Astra left.** A run cut off mid-task may leave partial edits. Read `git status` and `git diff`, decide what to keep, and look for processes it left running, such as headless Chrome holding files in the repo. Stop only those processes.
+2. **Implement it to the same standard.** AGENTS.md applies in full: logic in `src/lib` with tests, commands in `useActions`, edits through `ops.ts`, and the UI/UX system. Don't add dependencies without the user's OK.
+3. **Review your own work as you would Astra's.** Read your full diff, run `npm run typecheck && npm test && npm run build`, compare bundle sizes, and take screenshots at the breakpoints the change touches.
+4. **Commit and report as usual.** Make one focused commit per task. In the report, say that you implemented it yourself because Astra was rate-limited.
+5. **Hand back afterwards.** Once the reset time has passed, dispatch new tasks to Astra again.
 
 ### Brief template
 
