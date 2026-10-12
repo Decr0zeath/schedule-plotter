@@ -323,10 +323,12 @@ function SyncPill() {
         type="button"
         className={cx('sync-pill', `is-${state}`)}
         aria-expanded={open}
+        aria-label={label}
+        title={label}
         onClick={() => setOpen((o) => !o)}
       >
         {state === 'clean' ? <Check aria-hidden /> : <span className="sync-dot" aria-hidden />}
-        <span>{label}</span>
+        <span className="sync-label">{label}</span>
       </button>
       {open && (
         <div className="popover sync-pop is-end" role="dialog" aria-label="Publishing">

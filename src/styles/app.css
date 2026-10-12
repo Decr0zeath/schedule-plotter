@@ -1374,7 +1374,7 @@ select.input {
 }
 
 @media (max-width: 900px) {
-  .sync-pill span {
+  .sync-label {
     display: none;
   }
 
