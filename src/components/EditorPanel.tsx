@@ -17,6 +17,7 @@ import { useActions } from '../state/actions.ts';
 import { addMeetings, updateCourse, updateMeeting } from '../state/ops.ts';
 import { useStore } from '../state/store.tsx';
 import { useUI } from '../state/ui.tsx';
+import { AttendanceSection } from './AttendanceSection.tsx';
 
 /** Side panel for a course and every one of its meetings. */
 export function EditorPanel() {
@@ -43,10 +44,17 @@ export function EditorPanel() {
 
   useEffect(() => {
     if (!selectedMeeting) return;
-    panelRef.current
-      ?.querySelector(`[data-row="${selectedMeeting.id}"]`)
-      ?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-  }, [selectedMeeting?.id]);
+    // Keep fields in place when changing selection by focusing another meeting row.
+    const focusedRow = document.activeElement?.closest('.meeting-row');
+    if (focusedRow && panelRef.current?.contains(focusedRow)) return;
+    if (panelRef.current?.querySelector('.attendance-editor')) {
+      panelRef.current.querySelector('.editor-body')?.scrollTo({ top: 0 });
+    } else {
+      panelRef.current
+        ?.querySelector(`[data-row="${selectedMeeting.id}"]`)
+        ?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  }, [selectedMeeting?.id, selection?.kind === 'meeting' ? selection.date : undefined]);
 
   if (!course) return null;
 
@@ -111,6 +119,12 @@ export function EditorPanel() {
       </header>
 
       <div className="editor-body">
+        {selectedMeeting && (
+          <AttendanceSection
+            meeting={selectedMeeting}
+            date={selection?.kind === 'meeting' ? selection.date : undefined}
+          />
+        )}
         <div className="field-row">
           <label className="field field-code">
             <span>Code</span>

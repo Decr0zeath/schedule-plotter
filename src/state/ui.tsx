@@ -10,12 +10,12 @@ import {
 import { useTheme } from '../hooks/useTheme.ts';
 
 export type Selection =
-  | { kind: 'meeting'; id: string }
+  | { kind: 'meeting'; id: string; date?: string }
   | { kind: 'course'; id: string; focus?: boolean }
   | null;
 
 export type DialogName = 'settings' | 'calendar' | 'shortcuts' | null;
-export type View = 'week' | 'list';
+export type View = 'week' | 'list' | 'history';
 
 export interface ToastInput {
   message: string;
@@ -60,7 +60,8 @@ const VIEW_KEY = 'schedule-plotter:view';
 
 function readView(): View {
   try {
-    return localStorage.getItem(VIEW_KEY) === 'list' ? 'list' : 'week';
+    const view = localStorage.getItem(VIEW_KEY);
+    return view === 'list' || view === 'history' ? view : 'week';
   } catch {
     return 'week';
   }

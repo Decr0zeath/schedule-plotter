@@ -1,5 +1,5 @@
 import { courseLabel } from './schedule.ts';
-import { isoWeekday } from './time.ts';
+import { isoWeekday, parseIsoDate } from './time.ts';
 import type { Schedule } from './types.ts';
 
 const pad = (n: number) => String(n).padStart(2, '0');
@@ -35,11 +35,6 @@ function fold(line: string): string {
   }
   out.push(current);
   return out.join('\r\n ');
-}
-
-export function parseIsoDate(value: string): Date | null {
-  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
-  return m ? new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])) : null;
 }
 
 /**

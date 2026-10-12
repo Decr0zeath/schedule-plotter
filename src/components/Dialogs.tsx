@@ -372,7 +372,7 @@ const SHORTCUTS: [string, string[][]][] = [
   [
     'View',
     [
-      ['W / L', 'Week grid / list'],
+      ['W / L / H', 'Week grid / list / history'],
       [',', 'Settings'],
       ['?', 'This list'],
     ],

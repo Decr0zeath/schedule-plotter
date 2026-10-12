@@ -19,6 +19,24 @@ export function minutesOfDay(date: Date): number {
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
+export function localIsoDate(date: Date): string {
+  return `${String(date.getFullYear()).padStart(4, '0')}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
+
+/** Strict local calendar date; reject rollover dates such as February 30. */
+export function parseIsoDate(value: string): Date | null {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (!match) return null;
+  const date = new Date(0);
+  date.setFullYear(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+  date.setHours(0, 0, 0, 0);
+  return localIsoDate(date) === value ? date : null;
+}
+
+export function formatDate(value: string, weekday: 'short' | 'long' = 'short'): string {
+  return parseIsoDate(value)?.toLocaleDateString('en-US', { weekday, month: 'short', day: 'numeric' }) ?? value;
+}
+
 export const isMorning = (minutes: number) => Math.floor(minutes / 60) % 24 < 12;
 export const meridiem = (minutes: number) => (isMorning(minutes) ? 'AM' : 'PM');
 

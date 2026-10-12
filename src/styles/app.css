@@ -287,6 +287,17 @@ code {
     var(--shadow-sm);
 }
 
+.text-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
 /* ---------- Inputs ---------- */
 
 .input {
@@ -1314,6 +1325,14 @@ select.input {
 }
 
 @media (max-width: 1099px) {
+  .view-toggle span {
+    display: none;
+  }
+
+  .view-toggle button {
+    padding-inline: 8px;
+  }
+
   .app-body,
   .app.has-editor .app-body {
     grid-template-columns: minmax(0, 1fr) 0px;
@@ -1355,13 +1374,8 @@ select.input {
 }
 
 @media (max-width: 900px) {
-  .view-toggle span,
   .sync-pill span {
     display: none;
-  }
-
-  .view-toggle button {
-    padding: 0 8px;
   }
 
   .sync-pill {
@@ -1372,6 +1386,11 @@ select.input {
 }
 
 @media (max-width: 720px) {
+  .view-toggle button {
+    min-width: 40px;
+    min-height: 40px;
+  }
+
   .app-header {
     flex-wrap: wrap;
     gap: 8px 10px;

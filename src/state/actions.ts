@@ -1,10 +1,28 @@
 import { useMemo } from 'react';
+import {
+  ATTENDANCE_LABELS,
+  createEntry,
+  editEntry,
+  entryId,
+  markDayNoClass,
+  minutesLate,
+  removeEntry,
+  restoreEntries,
+  statusForArrival,
+  upsertEntry,
+  type AttendanceLog,
+  type AttendancePatch,
+  type AttendanceStatus,
+} from '../lib/attendance.ts';
 import { downloadText, readFileAsJson, slugify } from '../lib/download.ts';
 import { buildIcs } from '../lib/ics.ts';
 import { courseLabel, uid } from '../lib/schedule.ts';
 import { readImport } from '../lib/storage.ts';
-import { DAY_SHORT, formatTime } from '../lib/time.ts';
+import {
+  DAY_SHORT, formatDate, formatTime, isoWeekday, localIsoDate, minutesOfDay, parseIsoDate,
+} from '../lib/time.ts';
 import type { Meeting, Schedule } from '../lib/types.ts';
+import { useAttendance } from './attendance.tsx';
 import {
   addBlankSchedule,
   addCourse,
@@ -144,4 +162,77 @@ export function useActions() {
       },
     };
   }, [schedule, workspace, edit, commit, navigate, undo, toast, select, ui, store]);
+}
+
+/** Private attendance commands never dispatch through the workspace store. */
+export function useAttendanceActions() {
+  const { schedule } = useStore();
+  const { update } = useAttendance();
+  const { toast, select, setDrawerOpen } = useUI();
+
+  return useMemo(() => {
+    const withUndo = (ids: string[], operation: (log: AttendanceLog) => AttendanceLog, message: string) => {
+      const previous = update(operation);
+      toast({
+        message,
+        action: {
+          label: 'Undo',
+          run: () => { update((log) => restoreEntries(log, ids, previous)); },
+        },
+      });
+    };
+    const save = (meeting: Meeting, date: string, patch: AttendancePatch) => {
+      const now = Date.now();
+      update((log) => editEntry(log, schedule, meeting, date, patch, now));
+    };
+    return {
+      openOccurrence(meetingId: string, date: string) {
+        select({ kind: 'meeting', id: meetingId, date });
+        setDrawerOpen(false);
+      },
+      setStatus(meeting: Meeting, date: string, status: AttendanceStatus) {
+        save(meeting, date, { status });
+      },
+      setArrival(meeting: Meeting, date: string, arrived: number | null) {
+        save(meeting, date, { arrived });
+      },
+      setNote(meeting: Meeting, date: string, note: string) {
+        save(meeting, date, { note });
+      },
+      clearEntry(id: string) {
+        withUndo([id], (log) => removeEntry(log, id), 'Cleared attendance');
+      },
+      checkIn(meeting: Meeting) {
+        const now = new Date();
+        const date = localIsoDate(now);
+        if (
+          meeting.day !== isoWeekday(now)
+          || (schedule.termStart && date < schedule.termStart)
+          || (schedule.termEnd && date > schedule.termEnd)
+        ) return;
+        const arrived = minutesOfDay(now);
+        const status = statusForArrival(arrived, meeting.start);
+        const entry = {
+          ...createEntry(schedule, meeting, date, status, now.getTime()),
+          arrived,
+        };
+        const late = minutesLate(entry) ?? 0;
+        withUndo([entry.id], (log) => {
+          const previous = log.entries.find((e) => e.id === entry.id);
+          return upsertEntry(log, { ...entry, note: previous?.note ?? '' });
+        }, `Logged ${entry.courseLabel} · ${ATTENDANCE_LABELS[entry.status]}${late ? `, ${late} min` : ''}`);
+      },
+      markDay(date: string, note: string) {
+        const parsed = parseIsoDate(date);
+        if (!parsed) return;
+        const ids = schedule.meetings
+          .filter((m) => m.day === isoWeekday(parsed))
+          .map((m) => entryId(schedule.id, m.id, date));
+        if (!ids.length) return;
+        const now = Date.now();
+        withUndo(ids, (log) => markDayNoClass(log, schedule, date, note, now),
+          `Marked ${formatDate(date)} as no class · ${ids.length} class${ids.length === 1 ? '' : 'es'}`);
+      },
+    };
+  }, [schedule, update, toast, select, setDrawerOpen]);
 }

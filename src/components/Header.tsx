@@ -7,6 +7,7 @@ import {
   Ellipsis,
   FileJson,
   FileUp,
+  History,
   Image,
   Keyboard,
   LayoutGrid,
@@ -150,6 +151,7 @@ export function Header() {
             className={cx(ui.view === 'week' && 'is-on')}
             onClick={() => ui.setView('week')}
             title="Week grid (W)"
+            aria-label="Week"
           >
             <LayoutGrid aria-hidden /> <span>Week</span>
           </button>
@@ -160,8 +162,20 @@ export function Header() {
             className={cx(ui.view === 'list' && 'is-on')}
             onClick={() => ui.setView('list')}
             title="List (L)"
+            aria-label="List"
           >
             <List aria-hidden /> <span>List</span>
+          </button>
+          <button
+            type="button"
+            role="radio"
+            aria-checked={ui.view === 'history'}
+            className={cx(ui.view === 'history' && 'is-on')}
+            onClick={() => ui.setView('history')}
+            title="History (H)"
+            aria-label="History"
+          >
+            <History aria-hidden /> <span>History</span>
           </button>
         </div>
 

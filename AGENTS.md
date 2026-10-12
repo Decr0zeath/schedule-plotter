@@ -26,6 +26,7 @@ There is no linter or formatter. Match the surrounding style: 2-space indent, si
 - `public/schedule.json` is the user's published data. Don't hand-edit it as part of feature work.
 - Legacy conversion produces deterministic ids, and the published-vs-local comparison in `src/lib/storage.ts` depends on that. Keep them deterministic.
 - User-facing commands (menus, shortcuts, panel buttons) live in `useActions()` in `src/state/actions.ts`. Destructive commands show a toast with Undo instead of a confirm dialog.
+- The attendance log is private, and the schedule is public. Never write attendance data into the Workspace, `schedule.json`, imports, share links, the poster/PNG, print or `.ics`. The log's rules are under **Attendance log** below.
 
 ## Architecture
 
@@ -39,7 +40,14 @@ There is no linter or formatter. Match the surrounding style: 2-space indent, si
 - **UI state** (`src/state/ui.tsx`) holds:
   - The selection (a meeting or a course), which opens `EditorPanel`.
   - Hover linking, which highlights the same course or meeting across the sidebar, grid and editor.
-  - Dialogs, the week/list view, toasts, the theme, and PNG export requests.
+  - Dialogs, the week/list/history view, toasts, the theme, and PNG export requests.
+  - A meeting selection can carry a `date`, which opens that dated occurrence in the editor's Attendance section.
+- **Attendance log** (tardiness history):
+  - **Data.** One entry per dated class occurrence. Its id, `${scheduleId}/${meetingId}/${date}`, is deterministic, so devices can merge entries later. Entries snapshot the course label and times when they are logged, and History shows entries whose meeting was deleted as orphaned rows.
+  - **Logic.** Pure functions in `src/lib/attendance.ts`. Arriving 10 or more minutes after the start is Late (`LATE_AFTER_MINUTES`). A stored arrival time is kept but ignored for Absent and No class; read it through `arrivalToShow` and `minutesLate`.
+  - **State.** `src/state/attendance.tsx` stores the log under its own localStorage key, `schedule-plotter:attendance`. It is read through `normalizeAttendance` and written only after a change. It is not part of the workspace undo history.
+  - **Commands.** They live in `useAttendanceActions()` in `src/state/actions.ts`. Destructive commands show a toast whose Undo restores the affected entries (`restoreEntries`).
+  - **UI.** Logging happens from the "I'm here" button on the sidebar Up next card, the Attendance section at the top of the editor, and the History view (`HistoryView`).
 - **WeekGrid** (`src/components/WeekGrid.tsx`):
   - Hour height is fitted to the available space with a ResizeObserver.
   - Pointer gestures (create, move, resize; on touch, a long press starts a drag) run as a state machine in a ref. The live preview is `draft` state, and the change is committed on pointerup.
@@ -66,6 +74,7 @@ There is no linter or formatter. Match the surrounding style: 2-space indent, si
 - **Type.** Inter Variable is the UI font. Instrument Serif is only for display headings: the app title, dialog and editor titles, List-view day names, and the poster. Use `tabular-nums` for numbers that align (times, table columns), not for large stat values.
 - **Lines.** Gridlines and dividers are solid hairlines (`--line`, `--line-soft`), never dashed.
 - **Non-drag paths.** Every grid interaction also has a way to do it without dragging: the editor form, keyboard nudges on a selected block, and the List view, which is the grid's accessible table. Keep block `aria-label`s descriptive.
+- **Attendance statuses.** On time uses `--good`. Late uses `--warning` on the icon only; its label stays in ink. Absent uses `--critical`. Excused, No class and Not logged are neutral. Each status always shows its icon and its label. "N min late" appears only for Late and Excused.
 - **Breakpoints:**
   - ≥1280px: the editor docks as a third column.
   - <1280px: the editor overlays the grid.

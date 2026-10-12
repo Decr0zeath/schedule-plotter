@@ -1,6 +1,7 @@
 import { MapPin, Plus, TriangleAlert } from 'lucide-react';
 import { useMemo, type CSSProperties } from 'react';
 import { useNow } from '../hooks/useNow.ts';
+import { entryId } from '../lib/attendance.ts';
 import { cx } from '../lib/cx.ts';
 import { findConflicts } from '../lib/layout.ts';
 import { accentVar } from '../lib/palette.ts';
@@ -13,11 +14,22 @@ import {
   whenLabel,
   type WeekSummary,
 } from '../lib/stats.ts';
-import { DAY_LONG, DAY_SHORT, formatDuration, formatHours, formatRange, formatTime } from '../lib/time.ts';
+import {
+  DAY_LONG,
+  DAY_SHORT,
+  formatDuration,
+  formatHours,
+  formatRange,
+  formatTime,
+  isoWeekday,
+  localIsoDate,
+} from '../lib/time.ts';
 import type { Clock, Course, Meeting, Schedule } from '../lib/types.ts';
-import { useActions } from '../state/actions.ts';
+import { useActions, useAttendanceActions } from '../state/actions.ts';
+import { useAttendance } from '../state/attendance.tsx';
 import { useStore } from '../state/store.tsx';
 import { useUI } from '../state/ui.tsx';
+import { AttendanceArrival, AttendanceStatus } from './AttendanceStatus.tsx';
 
 export function Sidebar() {
   const { schedule } = useStore();
@@ -36,6 +48,8 @@ export function Sidebar() {
 
 function UpNextCard({ schedule }: { schedule: Schedule }) {
   const now = useNow();
+  const { byId } = useAttendance();
+  const attendance = useAttendanceActions();
   const { select } = useUI();
   const clock = schedule.settings.clock;
   const { current, next, startsIn, endsIn } = upNext(schedule.meetings, now);
@@ -54,6 +68,11 @@ function UpNextCard({ schedule }: { schedule: Schedule }) {
   const course = courses.get(show.courseId);
   if (!course) return null;
   const progress = current ? 1 - endsIn / (current.end - current.start) : 0;
+  const date = localIsoDate(now);
+  const isToday = show.day === isoWeekday(now) && (Boolean(current) || startsIn < 1440);
+  const entry = isToday ? byId.get(entryId(schedule.id, show.id, date)) : undefined;
+  const inTerm = (!schedule.termStart || date >= schedule.termStart) && (!schedule.termEnd || date <= schedule.termEnd);
+  const canCheckIn = isToday && inTerm && (Boolean(current) || startsIn <= 60);
 
   return (
     <section className="card upnext" style={{ '--accent': accentVar(course.color) } as CSSProperties}>
@@ -89,8 +108,34 @@ function UpNextCard({ schedule }: { schedule: Schedule }) {
         </span>
       </button>
       {current && (
-        <div className="upnext-progress" role="progressbar" aria-valuenow={Math.round(progress * 100)} aria-valuemin={0} aria-valuemax={100} aria-label="Class progress">
+        <div
+          className="upnext-progress"
+          role="progressbar"
+          aria-valuenow={Math.round(progress * 100)}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label="Class progress"
+        >
           <span style={{ width: `${progress * 100}%` }} />
+        </div>
+      )}
+      {entry ? (
+        <div className="upnext-attendance">
+          <AttendanceStatus status={entry.status} />
+          <AttendanceArrival entry={entry} clock={clock} />
+          <button
+            type="button"
+            className="btn btn-ghost"
+            onClick={() => attendance.openOccurrence(show.id, date)}
+          >
+            Change
+          </button>
+        </div>
+      ) : canCheckIn && (
+        <div className="upnext-attendance">
+          <button type="button" className="btn btn-secondary" onClick={() => attendance.checkIn(show)}>
+            I'm here
+          </button>
         </div>
       )}
       {current && next && courses.get(next.courseId) && (

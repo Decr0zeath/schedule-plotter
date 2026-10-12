@@ -4,6 +4,7 @@ import { AgendaView } from './components/AgendaView.tsx';
 import { Dialogs } from './components/Dialogs.tsx';
 import { EditorPanel } from './components/EditorPanel.tsx';
 import { Header } from './components/Header.tsx';
+import { HistoryView } from './components/HistoryView.tsx';
 import { Logo } from './components/Logo.tsx';
 import { PosterHost } from './components/Poster.tsx';
 import { Sidebar } from './components/Sidebar.tsx';
@@ -14,6 +15,7 @@ import { useNow } from './hooks/useNow.ts';
 import { cx } from './lib/cx.ts';
 import { DAY_SHORT, MINUTES_PER_DAY, clamp, formatDuration, isoWeekday } from './lib/time.ts';
 import { useActions } from './state/actions.ts';
+import { AttendanceProvider } from './state/attendance.tsx';
 import { updateMeeting } from './state/ops.ts';
 import { StoreProvider, useStore } from './state/store.tsx';
 import { UIProvider, useUI } from './state/ui.tsx';
@@ -22,7 +24,9 @@ export function App() {
   return (
     <UIProvider>
       <StoreProvider fallback={<Splash />}>
-        <Shell />
+        <AttendanceProvider>
+          <Shell />
+        </AttendanceProvider>
       </StoreProvider>
     </UIProvider>
   );
@@ -66,6 +70,8 @@ function Shell() {
           {isPhone && ui.view === 'week' && <DayPager day={day} onChange={setPhoneDay} />}
           {ui.view === 'week' ? (
             <WeekGrid days={isPhone ? [day] : visible} onSwipe={isPhone ? step : undefined} />
+          ) : ui.view === 'history' ? (
+            <HistoryView />
           ) : (
             <AgendaView />
           )}
@@ -191,6 +197,8 @@ function useShortcuts() {
           return ui.setView('week');
         case 'l':
           return ui.setView('list');
+        case 'h':
+          return ui.setView('history');
         case ',':
           return ui.openDialog('settings');
         case '?':

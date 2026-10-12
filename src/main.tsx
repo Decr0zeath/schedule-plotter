@@ -5,6 +5,7 @@ import './styles/tokens.css';
 import './styles/app.css';
 import './styles/grid.css';
 import './styles/panels.css';
+import './styles/attendance.css';
 import './styles/poster.css';
 
 import { StrictMode } from 'react';
