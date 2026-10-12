@@ -153,6 +153,13 @@ export function HistoryView() {
             {day === today && <span className="today-pill">Today</span>}
           </header>
           <table className="history-table">
+            {/* Fixed widths on <col>, so every day's table lines up with the others. */}
+            <colgroup>
+              <col className="history-col-time" />
+              <col className="history-col-course" />
+              <col className="history-col-status" />
+              <col />
+            </colgroup>
             <thead className="visually-hidden">
               <tr>
                 <th scope="col">Time</th>

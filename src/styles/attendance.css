@@ -229,14 +229,21 @@
   background: color-mix(in oklab, var(--focus) 10%, transparent);
 }
 
-.history-time {
+.history-col-time {
   width: 150px;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
 }
 
-.history-course {
+.history-col-course {
   width: 180px;
+}
+
+.history-col-status {
+  width: 170px;
+}
+
+.history-time {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .history-course-line {
@@ -265,10 +272,6 @@
 .history-course small {
   display: block;
   margin-top: 5px;
-}
-
-.history-status {
-  width: 150px;
 }
 
 .history-status-detail {
