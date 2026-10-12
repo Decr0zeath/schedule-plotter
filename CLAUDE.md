@@ -22,20 +22,22 @@ The goal is an efficient app with a coherent UI/UX. Judge every change against t
 
 Write the brief to a file in your scratchpad directory and pipe it in on stdin, which avoids shell-quoting problems. Then run it with `run_in_background` and wait for the completion notification. Don't poll.
 
+The user works on three machines (home desktop, laptop, office computer) and the repo lives at a different path on each, so never hardcode it. Run from the session's working directory and let `git rev-parse` find the root. `$SCRATCH` stands for this session's scratchpad directory; substitute its actual path.
+
 ```sh
-cd "C:/Users/SCS/Downloads/schedule-plotter" && codex exec -m gpt-6-astra -c model_reasoning_effort='"high"' \
-  -s workspace-write -C "C:/Users/SCS/Downloads/schedule-plotter" \
+REPO="$(git rev-parse --show-toplevel)" && cd "$REPO" && codex exec -m gpt-6-astra -c model_reasoning_effort='"high"' \
+  -s workspace-write -C "$REPO" \
   -o "$SCRATCH/astra/<task>.result.md" - < "$SCRATCH/astra/<task>.brief.md" > "$SCRATCH/astra/<task>.log" 2>&1
 ```
 
-- **Effort.** `~/.codex/config.toml` defaults to effort `max`. Always pass the `high` override shown above.
+- **Effort.** `~/.codex/config.toml` may default to effort `max` (it is per machine). Always pass the `high` override shown above.
 - **Git.** Dispatch only from a clean working tree, so `git diff` shows exactly what Astra changed. Astra doesn't commit. After a task passes review, commit it as one focused commit. Pushing to `main` deploys the public site, so push only when the user asks.
 - **No network in the sandbox.** `workspace-write` blocks network access, so Astra can't `npm install`. If a task needs a new dependency, get the user's OK, install it yourself before dispatching, and name it in the brief. Otherwise tell Astra not to add dependencies.
 - **Session id.** The header of the log contains `session id: <uuid>`. You need it for follow-ups.
 - **Follow-ups.** Send critique into the same session, run from the repo directory. `resume` inherits the session's sandbox and working directory, and `-i` attaches a screenshot:
 
   ```sh
-  cd "C:/Users/SCS/Downloads/schedule-plotter" && codex exec resume <session-id> -m gpt-6-astra \
+  REPO="$(git rev-parse --show-toplevel)" && cd "$REPO" && codex exec resume <session-id> -m gpt-6-astra \
     -c model_reasoning_effort='"high"' -i shot.png \
     -o "$SCRATCH/astra/<task>.r2.md" - < "$SCRATCH/astra/<task>.critique-1.md" > "$SCRATCH/astra/<task>.r2.log" 2>&1
   ```
@@ -56,7 +58,7 @@ Don't accept the report at face value.
 1. **Read the diff.** Run `git status` and `git diff`, and read every changed or new file.
 2. **Re-run the checks yourself:** `npm run typecheck && npm test && npm run build`. Confirm the build emitted the `index-*.js` bundle and the separate lazy `html-to-image` chunk. Compare the bundle sizes with the previous build and question any growth; at the time of writing the main bundle was about 310 kB (96 kB gzip).
 3. **Look at it** whenever the UI changed.
-   - Start `npm run dev` in the background and capture screenshots with headless Chrome (`C:/Program Files/Google/Chrome/Application/chrome.exe`) driven by `puppeteer-core`. Install puppeteer-core in the scratchpad, never in the project.
+   - Start `npm run dev` in the background and capture screenshots with headless Chrome driven by `puppeteer-core`. Chrome is usually at `C:/Program Files/Google/Chrome/Application/chrome.exe`; check that path on the current machine first. Install puppeteer-core in the scratchpad, never in the project.
    - Cover 1440×900 in light and dark, 1024×768, and 390×844 with touch emulation.
    - Script the interactions the task touched: drag, keyboard, menus, dialogs.
    - To show time-dependent states (the now-line, "Happening now"), inject a fake `Date` with `evaluateOnNewDocument`.
